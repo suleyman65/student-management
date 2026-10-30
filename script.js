@@ -70,15 +70,25 @@ function showmenu(){
 function addstudent(){
    
     const name =prompt("öğrencinin adını giriniz");
+    const onlyLetters = /^[a-zA-ZçğıöşüÇĞİÖŞÜ ]+$/;
     if(name===null){
         return;
     }
+    if (onlyLetters.test(name)) {
+    alert("Öğrenci adında sayı kullanılamaz");
+    return;
+}
     const surname =prompt("öğrencinin soyadını giriniz")
+    
     if(surname===null){
         return;
     }
+    if (onlyLetters.test(surname)) {
+    alert("Öğrenci soyadında sayı kullanılamaz");
+    return ;
+}
     const age =prompt("öğrencinin yaşını giriniz")
-    
+
     if (age === null) {
     return;
     }
@@ -86,7 +96,7 @@ function addstudent(){
     const numeriage=Number(age);
     
     if(!Number.isInteger(numeriage)||numeriage<1||numeriage>100 ){
-        alert("Geçerli bir yaş giriniz!");
+        alert("Geçerli bir yaş giriniz");
         return;
     }
 
@@ -94,6 +104,11 @@ function addstudent(){
     if(department===null){
         return;
     }
+    
+    if (onlyLetters.test(department)) {
+    alert("Öğrenci bülümünde sayı kullanılamaz");
+    return;
+}
 
     if(name.trim()=== "" || surname.trim()=== "" || age.trim()=== "" ||department.trim()===""){
         alert("öğrenci bilgileri boş bırakılamaz")
@@ -130,19 +145,19 @@ if(students.length===0){
     alert("kayıtlı öğrenci bulunamadı")
     return;
 }
-       const result =students.map(student=> student.id + "-" + student.name +"-"+  student.surname +"-"+ student.age +"-"+ student.department).join("\n")
-    
-    alert(result)
+    const result = students.map(student =>
+    `${student.id} - ${student.name} ${student.surname} | ${student.age} yaş | ${student.department}`
+).join("\n");
+
+alert(result);
     
 }
 
-
-
-
-
-
-
 function deletestudent(){
+       if (students.length === 0) {
+    alert("Kayıtlı öğrenci bulunamadı");
+    return;
+}
     const studentlist = students.map(student =>
     student.id + " - " + student.name + " " + student.surname
 ).join("\n");
@@ -151,11 +166,12 @@ const id = prompt(
     studentlist +
     "\n\nSilmek istediğiniz öğrencinin ID numarasını giriniz:"
 );
+ 
     if(id===null){
        return;
     }
     const nid = Number(id);
-     if (isNaN(nid) || id==="" ||id.trim()===""||!Number.isSafeInteger(nid)||nid<1) {
+     if (isNaN(nid) || id==="" ||id.trim()===""||!Number.isInteger(nid)||nid<1) {
         alert("Geçersiz bir sayı girdiniz!");
         return;
     } 
@@ -172,15 +188,9 @@ const id = prompt(
     alert("Öğrenci başarıyla silindi!");
 }
 
-
-
-
-
     function exitapp(){
     alert("Öğrenci yönetim sisteminden çıkış yapıldı.");
     }
-
-
 
 showmenu()
 
