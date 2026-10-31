@@ -70,21 +70,21 @@ function showmenu(){
 function addstudent(){
    
     const name =prompt("öğrencinin adını giriniz");
-    const onlyLetters = /^[a-zA-ZçğıöşüÇĞİÖŞÜ ]+$/;
+    const hasInvalidCharacter = /[^a-zA-ZçğıöşüÇĞİÖŞÜ ]/;
     if(name===null){
         return;
     }
-    if (onlyLetters.test(name)) {
-    alert("Öğrenci adında sayı kullanılamaz");
+    if (hasInvalidCharacter.test(name)) {
+    alert("Öğrenci adında geçersiz değer ");
     return;
 }
     const surname =prompt("öğrencinin soyadını giriniz")
-    
-    if(surname===null){
-        return;
-    }
-    if (onlyLetters.test(surname)) {
-    alert("Öğrenci soyadında sayı kullanılamaz");
+    if (surname === null) {
+    return;
+}
+  
+     if (hasInvalidCharacter.test(surname)) {
+    alert("Öğrenci soyadında sgeçersiz değer");
     return ;
 }
     const age =prompt("öğrencinin yaşını giriniz")
@@ -105,7 +105,7 @@ function addstudent(){
         return;
     }
     
-    if (onlyLetters.test(department)) {
+    if (hasInvalidCharacter.test(department)) {
     alert("Öğrenci bülümünde sayı kullanılamaz");
     return;
 }
